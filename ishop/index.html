@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+
+	<div class="container"></div>
+
+
+	<script src="https://unpkg.com/react@15/dist/react.js"></script>
+	<script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script>
+
+	<script src="Ishop.js"></script>
+	<link rel="stylesheet" type="text/css" href="Ishop.css" />
+
+	<script>
+		"use strict"
+		const nameText = `ishop`
+
+		const productsArr = [
+			{ name: `Наименование`, prise: `Цена`, url: `Фото`, amount: `Количество`, btn: `Удалить` },
+			{ name: `Холодильник`, prise: 5000, url: `https://1teh.by/files/category/123/f50f5582c90992b64dfc45602a346646.png`, amount: 5, btn: true },
+			{ name: `Телевизор`, prise: 4000, url: `https://online-samsung.ru/sites/default/files/styles/product_big/public/products/DT-UN32N5300AFXZA-gallery2-050118.jpg?itok=554dPCNW`, amount: 4, btn: true },
+			{ name: `Телефон`, prise: 3000, url: `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSfR940gp-K4mnnVw_128vCg1vKYEet-PsGw&usqp=CAU`, amount: 3, btn: true },
+			{ name: `Чайник`, prise: 2000, url: `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ49XmDTPm2GDvcoi7XraspiLCpnK9xdTYYyQ&usqp=CAU`, amount: 2, btn: true },
+			{ name: `Миксер`, prise: 1000, url: `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNA0uzy9UUTo5KIzjGMRzGTJEMaVUoLwPIQg&usqp=CAU`, amount: 1, btn: true },
+		]
+
+		ReactDOM.render(
+			React.createElement(Ishop, { name: nameText, products: productsArr }),
+			document.querySelector(".container")
+		)
+
+
+	</script>
+
+</body>
+
+</html>

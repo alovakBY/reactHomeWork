@@ -1,0 +1,12 @@
+.FilterHeader {
+  margin-bottom: 5px;
+}
+
+.FilterHeader button {
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.FilterHeader input[type="checkbox"] {
+  cursor: pointer;
+}
