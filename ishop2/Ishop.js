@@ -10,27 +10,32 @@ const Ishop = React.createClass({
 	getInitialState: function() {
 		return {
 			clickLine: '',
-			activ: 'activ',
+			deleteLine: '',
+			products: [...this.props.products],
 		}
 	},
 
-	cbgetRedBG: function(target) {
-		console.log(target.className)
+	cbGetRedBG: function(e) {
 		this.setState(
-			{clickLine: target.firstChild.textContent}
+			{clickLine: e.className}
 		)
-		
+	},
+
+	cbGetDeleteLine(e) {
+		const deleteProductsArr = this.state.products.filter(el => {
+			return el.code !== parseInt(e.className)
+		}) 
+		this.setState(
+			{deleteLine: e.className, products: deleteProductsArr}
+		)
 	},
 
 	render: function() {
-
-		const products = this.props.products.map((e,i) => {
+		const products = this.state.products.map((e,i) => {
 			if (e.name === this.state.clickLine && e.name !== `Наименование`) {
-				return React.createElement(Product, {key: this.props.products[i].name, product: this.props.products[i], getRedBG: this.cbgetRedBG, activLine: this.state.clickLine,
-					getClassTR: this.state.activ})
+				return React.createElement(Product, {key: this.state.products[i].code, product: this.state.products[i], getRedBG: this.cbGetRedBG, activLine: this.state.clickLine, getDeleteLine: this.cbGetDeleteLine, deleteLine: this.state.deleteLine})
 			}
-			return React.createElement(Product, {key: this.props.products[i].name, product: this.props.products[i], getRedBG: this.cbgetRedBG, activLine: this.state.clickLine,
-				getClassTR: ``})
+			return React.createElement(Product, {key: this.state.products[i].code, product: this.state.products[i], getRedBG: this.cbGetRedBG, activLine: this.state.clickLine, getDeleteLine: this.cbGetDeleteLine, deleteLine: this.state.deleteLine})
 		})
 
 		return React.DOM.div({className: `Ishop`},
