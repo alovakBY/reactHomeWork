@@ -16,7 +16,6 @@ const Product = React.createClass({
 	},
 
 	lineClick: function(e) {
-		console.log(e.currentTarget)
 		this.props.getRedBG(e.currentTarget)
 	},
 
