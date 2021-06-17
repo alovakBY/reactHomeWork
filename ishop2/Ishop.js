@@ -9,24 +9,24 @@ const Ishop = React.createClass({
 
 	getInitialState: function() {
 		return {
-			clickLine: '',
-			deleteLine: '',
+			clickLine: 0,
+			deleteLine: 0,
 			products: [...this.props.products],
 		}
 	},
 
-	cbGetRedBG: function(e) {
+	cbGetRedBG: function(code) {
 		this.setState(
-			{clickLine: e.className}
+			{clickLine: code}
 		)
 	},
 
-	cbGetDeleteLine(e) {
+	cbGetDeleteLine(code) {
 		const deleteProductsArr = this.state.products.filter(el => {
-			return el.code !== parseInt(e.className)
+			return el.code !== code
 		}) 
 		this.setState(
-			{deleteLine: e.className, products: deleteProductsArr}
+			{deleteLine: code, products: deleteProductsArr}
 		)
 	},
 

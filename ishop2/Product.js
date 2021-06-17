@@ -5,18 +5,19 @@ const Product = React.createClass({
 	propTypes: {
 		product: React.PropTypes.object.isRequired,
 		getRedBG: React.PropTypes.func.isRequired,
-		activLine: React.PropTypes.string.isRequired,
+		activLine: React.PropTypes.number.isRequired,
 		getDeleteLine: React.PropTypes.func.isRequired,
-		deleteLine: React.PropTypes.string.isRequired,
+		deleteLine: React.PropTypes.number.isRequired,
 	},
 
 	delClick: function(e) {
 		e.stopPropagation()
-		this.props.getDeleteLine(e.target.closest(`tr`))
+		this.props.getDeleteLine(this.props.product.code)
 	},
 
-	lineClick: function(e) {
-		this.props.getRedBG(e.currentTarget)
+	lineClick: function() {
+		if (typeof this.props.product.code === 'string') return
+		this.props.getRedBG(this.props.product.code)
 	},
 
 	aStopProp: function(e) {
@@ -35,7 +36,7 @@ const Product = React.createClass({
 				return React.DOM.td({key: i, className: `td`}, this.props.product[cell])
 			} 
 		}) 
-		return React.DOM.tr({className: `${this.props.product.code}`, style: {backgroundColor: redCol}, data : this.props.product.code ,onClick: this.lineClick}, prod)
+		return React.DOM.tr({style: {backgroundColor: redCol}, onClick: this.lineClick}, prod)
 	}
 
 })
