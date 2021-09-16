@@ -1,50 +1,53 @@
+'use strict'
+
 const Filter = React.createClass({
 
-	displayName: "Filter",
-	
+	displayName: 'Filter',
+
 	propTypes: {
-		words: React.PropTypes.array,
+		words: React.PropTypes.array.isRequired,
 	},
-	
+
 	getInitialState: function() {
 		return {
-			words: this.props.words, 
-			sort: false, 
-			filter: "",
+			wordsState: this.props.words,
+			InputTextValue: '',
+			checked: false,
 		}
 	},
-	
-	filterWords: function(e) {
-		this.setState({ filter: e.target.value },this.getFilterSortArr)
+
+	filter: function(e) {
+		this.setState({ InputTextValue: e.target.value }, this.getFilterSortArr)
 	},
-	
-	sortWords: function (e) {
-		this.setState({ sort: e.target.checked },this.getFilterSortArr)
+
+	sort: function(e) {
+		this.setState({ checked: !this.state.checked }, this.getFilterSortArr)
 	},
-	
+
 	reset: function() {
-		this.setState({ sort: false, filter:"",}, this.getFilterSortArr)
+		this.setState({ InputTextValue: '', wordsState: this.props.words, checked: false})
 	},
 
 	getFilterSortArr: function() {
-		const wordsListFilter = this.props.words.filter(word =>  word.includes(this.state.filter))
-		if(this.state.sort) wordsListFilter.sort()
-		this.setState({words: wordsListFilter})
+		const arr = this.props.words.filter( word => word.includes(this.state.InputTextValue))
+		if (this.state.checked) arr.sort()
+		this.setState({ wordsState: arr })
 	},
-	
-	render: function() {
 
-		const wordsList = this.state.words.map(w => React.DOM.option({key: w}, w))
-	
-		return React.DOM.div({className: "Filter"},
-			React.DOM.div({className: "FilterHeader"},
-			React.DOM.input({type:"checkbox", checked: this.state.sort, onClick: this.sortWords}),
-			React.DOM.input({type:"text", value: this.state.filter, onChange: this.filterWords}),
-			React.DOM.button({type: "button", onClick: this.reset}, "Сброс")
-			),
-			React.DOM.div({className: "FilterFooter"},
-			React.DOM.select({size: `5`}, wordsList)
-			))
-	},
+	render: function () {
+
+		const option = this.state.wordsState.map( word => {
+			return React.DOM.option({ key: word }, word)
+		})
+
+		return React.DOM.div(null, 
+			React.DOM.input({ type: 'checkbox' , className: 'inputCheckbox', checked: this.state.checked, onClick: this.sort}),
+			React.DOM.input({ type: 'text', className: 'inputText',  value: this.state.InputTextValue, onChange: this.filter} ),
+			React.DOM.button({ className: 'button' , onClick: this.reset}, 'сброс'),
+			React.DOM.div({ className:'bottom' }, 
+				React.DOM.select({className: 'select' , size: 5 }, option)
+			)
+		)
+	}
 
 })

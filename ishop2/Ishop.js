@@ -1,48 +1,46 @@
 const Ishop = React.createClass({
 
-	displayName: "Ishop",
+	displayName: 'Ishop',
 
 	propTypes: {
-		products: React.PropTypes.array.isRequired,
 		name: React.PropTypes.string.isRequired,
+		products: React.PropTypes.array.isRequired,
 	},
 
 	getInitialState: function() {
 		return {
-			clickLine: 0,
-			deleteLine: 0,
-			products: [...this.props.products],
+			productsStateIshop: this.props.products,
+			activeLine: 0,
 		}
 	},
 
-	cbGetRedBG: function(code) {
-		this.setState(
-			{clickLine: code}
-		)
+	cbGetActiveLine: function(code) {
+		this.setState({ activeLine: code })
 	},
 
-	cbGetDeleteLine(code) {
-		const deleteProductsArr = this.state.products.filter(el => {
-			return el.code !== code
-		}) 
-		this.setState(
-			{deleteLine: code, products: deleteProductsArr}
-		)
+	cbGetDeleteLine: function(codePr) {
+		const conf = confirm('Вы действительно хотите удалить этот товар?')
+		if (conf) {const arr = this.state.productsStateIshop.filter( product => {
+			return product.code !== codePr
+		})
+		this.setState({ productsStateIshop:arr}) 
+		} 
 	},
 
 	render: function() {
-		const products = this.state.products.map((e,i) => {
-			if (e.name === this.state.clickLine && e.name !== `Наименование`) {
-				return React.createElement(Product, {key: this.state.products[i].code, product: this.state.products[i], getRedBG: this.cbGetRedBG, activLine: this.state.clickLine, getDeleteLine: this.cbGetDeleteLine, deleteLine: this.state.deleteLine})
-			}
-			return React.createElement(Product, {key: this.state.products[i].code, product: this.state.products[i], getRedBG: this.cbGetRedBG, activLine: this.state.clickLine, getDeleteLine: this.cbGetDeleteLine, deleteLine: this.state.deleteLine})
+		const tr = this.state.productsStateIshop.map( product => {
+			return React.createElement(
+				Product, 
+				{key: product.code,product: product, getActiveLine: this.cbGetActiveLine, activeLine:this.state.activeLine, getDeleteLine: this.cbGetDeleteLine }
+			)
 		})
 
-		return React.DOM.div({className: `Ishop`},
+		return React.DOM.div({ className: 'Ishop'}, 
 			React.DOM.h1(null, this.props.name),
-			React.DOM.table({className: "products"}, 
-				React.DOM.tbody(null, products)
+			React.DOM.table({ className: 'products' },
+				React.DOM.tbody(null, tr)
 			)
 		)
 	}
-})
+ });
+

@@ -1,12 +1,19 @@
-.FilterHeader {
-  margin-bottom: 5px;
-}
-
-.FilterHeader button {
-  margin-left: 5px;
+.button {
   cursor: pointer;
 }
 
-.FilterHeader input[type="checkbox"] {
+.inputText {
+  margin: 0 5px;
+}
+
+.inputCheckbox {
   cursor: pointer;
+}
+
+.bottom {
+  margin-top: 5px;
+}
+
+.select {
+  width: 250px;
 }

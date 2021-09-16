@@ -9,19 +9,16 @@
 
 <body>
 
-	<div class="container"></div>
-
+	<div id="container"></div>
 
 	<script src="https://unpkg.com/react@15/dist/react.js"></script>
 	<script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script>
 
-
-	<script src="Filter.js"></script>
-	<link rel="stylesheet" type="text/css" href="Filter.css" />
-
+	<script src="./Filter.js"></script>
+	<link rel="stylesheet" href="./Filter.css">
 
 	<script>
-		"use strict"
+		'use strict'
 
 		const arrWords = [
 			`частнопредпринимательский`,
@@ -30,22 +27,19 @@
 			`высокопревосходительство`,
 			`одинадцатиклассница`,
 			`делопроизводительница`,
-			`бургомистрство`, `герольдство`,
+			`бургомистрство`,
+			`герольдство`,
 			`контрстратегия`,
 			`монстрский`
 		]
 
-		let sort = false
-
-
 		ReactDOM.render(
-			React.createElement(Filter, { words: arrWords, sortCheckbox: sort }),
-			document.querySelector(".container")
+			React.createElement(Filter, { words: arrWords }),
+			document.getElementById('container')
 		)
 
 
 	</script>
-
 </body>
 
 </html>
